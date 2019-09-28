@@ -30,9 +30,9 @@ class LCATesting {
 		//           0 19       2
 		//             /
 		//            4
-		
+		TreeNode result = LCA.lowestCommonAncestor(root,root.left.left, root.right.left);
 		assertEquals("Testing LCA, node 0 and node 2, Expected result = root",
-				LCA.lowestCommonAncestor(root, root.left.left.left, root.right.right.left),root);
+				result,root);
 	}
 	
 	@Test
@@ -58,9 +58,9 @@ class LCATesting {
 		//           0           11 10
 		//            
 		//            
-		
+		TreeNode result = LCA.lowestCommonAncestor(root, root.left.left.left, root.right.right.left);
 		assertEquals("Testing LCA, node 6 and node 11, Expected result = Node 4",
-				LCA.lowestCommonAncestor(root, root.left.left.left, root.right.right.left), root.right);
+				result, root);
 	}
 	
 	@Test
@@ -85,16 +85,16 @@ class LCATesting {
 		//                           3
 		//                          /
 		//                         2 
-		
-		assertEquals("Testing LCA, node 2 and node 5, Expected result = Node 4",
-				LCA.lowestCommonAncestor(root, root.left.left.left, root.right.right.left), root.right);
+		TreeNode result = LCA.lowestCommonAncestor(root, root.right.right, root.right);
+		assertEquals("Testing LCA, node 3 and node 5,Result "+result.value+" Expected result = Node 9",
+				result, root.right);
 	}
 	
 	@Test
 	void lcaRootTest() {
 		TreeNode root = new TreeNode(1);
 		assertEquals("Testing LCA, only root",
-				LCA.lowestCommonAncestor(root, root.left, root.right),root);
+				LCA.lowestCommonAncestor(root, root,root),root);
 		
 	}
 	
@@ -103,7 +103,7 @@ class LCATesting {
 	void lcaNullTest() {
 		TreeNode root = null;
 		assertEquals("Testing LCA, root = null",
-				LCA.lowestCommonAncestor(root, root,root), root);
+				LCA.lowestCommonAncestor(root, root,root), null);
 		
 		
 	}
@@ -113,10 +113,11 @@ class LCATesting {
 		TreeNode root = new TreeNode(0);
 		root.right = new TreeNode(5);
 		root.right.right = new TreeNode(4);
-		root.right.right.right = new TreeNode(3);
-		root.right.right.right.right = new TreeNode(2);
-		assertEquals("Testing LCA,Straight Line Test, node 2 and node 4, Expected result = Node 5",
-				LCA.lowestCommonAncestor(root, root.right.right, root.right.right.right), root.right);
+		root.right.right.right = new TreeNode(1);
+		TreeNode result = LCA.lowestCommonAncestor(root, root.right ,root.right.right);
+		assertEquals("Testing LCA,Straight Line Test, node 1 and node 4,Result = "+ result.value+" , Expected result = root",
+				result, root.right);
+		
 		
 		//                   0
 		//                    \
@@ -124,9 +125,9 @@ class LCATesting {
 		//                      \
 		//                       4
 		//                        \
-		//                         3
-		//                          \
-		//                           2
+		//                         1
+		//                          
+		//                           
 		//                          
 		// 
 		
@@ -149,9 +150,9 @@ class LCATesting {
 		//                /\  /\
 		//               4  5 6 7
 
-		
+		TreeNode result = LCA.lowestCommonAncestor(root,root.left.left, root.right.left);
 		assertEquals("Testing LCA, node 4 and node 6, Expected result = root",
-				LCA.lowestCommonAncestor(root,root.left.left, root.right.left),root);
+				result,root);
 	}	
 		
 	
@@ -171,9 +172,9 @@ class LCATesting {
 		//                /\  
 		//               4  5  
 
-		
+		TreeNode result = LCA.lowestCommonAncestor(root,root.left.left, root.right);
 		assertEquals("Testing LCA, node 4 and node 2, Expected result = root",
-				LCA.lowestCommonAncestor(root,root.left, root.left.left),root);
+				result,root);
 		
 	}
 	
