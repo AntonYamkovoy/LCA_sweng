@@ -8,7 +8,11 @@ import org.junit.jupiter.api.Test;
 class LCATesting {
 
 	
-	
+	@Test
+	void classTest() {
+		LCA lca = new LCA();
+		
+	}
 	@Test 
 	void lcaNullTest() {
 		TreeNode root = null;
@@ -322,6 +326,19 @@ class LCATesting {
 		
 		assertEquals("Testing multiple for less than 2 params case",
 				result, null);
+	}
+	
+	
+	@Test
+	void lcaMultipleRootBefore() {
+		TreeNode root = new TreeNode(1);                            
+		root.left = new TreeNode(2); 
+		root.right = new TreeNode(4);
+		root.left.left = new TreeNode(7);
+		TreeNode[] targets = {root.left,root.right,root.left.left};
+		TreeNode result = LCA.lowestCommonAncestorMultiple(root,targets);
+		assertEquals(result,root);
+		
 	}
 	
 
