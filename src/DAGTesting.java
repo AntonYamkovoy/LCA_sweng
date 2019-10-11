@@ -170,6 +170,110 @@ class DAGTesting {
 	}
 	
 	
+	@Test void DAG_LCA_simple_1() {
+	DAG graph = new DAG(16);
+		
+		graph.addEdge(1, 2);
+		graph.addEdge(1, 3);
+		graph.addEdge(1, 4);
+		graph.addEdge(2, 5);
+		graph.addEdge(2, 6);
+		graph.addEdge(3, 7);
+		graph.addEdge(6, 8);
+		graph.addEdge(7, 8);
+		
+		int result_1 = graph.dagLCA(1, 5, 8);
+		assertEquals(2,result_1);
+
+		int result_2 = graph.dagLCA(1, 4, 2);
+		assertEquals(1,result_2);
+		
+		int result_3 = graph.dagLCA(1, 4, 7);
+		assertEquals(1,result_3);
+		
+		int result_4 = graph.dagLCA(1, 5, 2);
+		assertEquals(2,result_4);
+		
+	}
+	
+	
+	@Test void DAG_LCA_self_node() {
+		DAG graph = new DAG(16);
+		
+		graph.addEdge(1, 2);
+		graph.addEdge(1, 3);
+		graph.addEdge(1, 4);
+		graph.addEdge(2, 5);
+		graph.addEdge(2, 6);
+		graph.addEdge(3, 7);
+		graph.addEdge(6, 8);
+		graph.addEdge(7, 8);
+		
+		int result = graph.dagLCA(1, 5, 2);
+		assertEquals(2,result);
+		
+	}
+	
+	
+	@Test void DAG_LCA_loop() {
+		DAG graph = new DAG(16);
+		
+		graph.addEdge(1, 2);
+		graph.addEdge(2, 3);
+		graph.addEdge(3, 1);
+		graph.addEdge(2, 5);
+		graph.addEdge(2, 6);
+		graph.addEdge(3, 7);
+		graph.addEdge(6, 8);
+		graph.addEdge(7, 8);
+		
+		int result = graph.dagLCA(1, 5, 2);
+		assertEquals(-1,result); // -1 error return expected as there is a cycle inside the graph
+		
+	}
+	
+	
+	@Test void DAG_LCA_no_loops_no_vertex() {
+		DAG graph = new DAG(16);
+		
+		graph.addEdge(1, 2);
+		graph.addEdge(1, 3);
+		graph.addEdge(1, 4);
+		graph.addEdge(2, 5);
+		graph.addEdge(2, 6);
+		graph.addEdge(3, 7);
+		graph.addEdge(6, 8);
+		graph.addEdge(7, 8);
+		
+		int result = graph.dagLCA(1, 5, 9);
+		assertEquals(-1,result);
+		
+	}
+	
+	@Test void DAG_LCA_negative() {
+		DAG graph = new DAG(4);
+		
+		graph.addEdge(1, 2);
+		graph.addEdge(1, 3);
+
+		
+		int result = graph.dagLCA(1, 2, -5);
+		assertEquals(-1,result);
+		
+	}
+	
+	@Test void DAG_LCA_empty_dag() {
+		DAG graph = new DAG(16);
+		
+		
+		int result = graph.dagLCA(1, 5, 9);
+		assertEquals(-1,result);
+		
+		assertEquals(-1,graph.dagLCA(1,2, 0));
+		assertEquals(-1,graph.dagLCA(1,-1, -1));
+		assertEquals(-1,graph.dagLCA(-1,-1, -1));
+		
+	}
 	
 	
 
