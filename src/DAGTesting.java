@@ -275,6 +275,139 @@ class DAGTesting {
 		
 	}
 	
+	@Test void DAG_LCA_Multiple_null() {
+		DAG graph = new DAG(16);
+		int[] targets = {1,2,3};
+		int result = graph.MultipleDagLCA(1,targets);
+		assertEquals(-1,result);
+		
+	}
+	
+	@Test void DAG_LCA_Multiple_base() {
+		DAG graph = new DAG(4);
+		graph.addEdge(1, 2);
+		graph.addEdge(1, 3);
+		
+		int[] targets = {2,3};
+		int result = graph.MultipleDagLCA(1,targets);
+		assertEquals(1,result);
+		
+	}
+	
+	
+	@Test void DAG_LCA_Multiple_normal_1() {
+		DAG graph = new DAG(8);
+		graph.addEdge(1, 2);
+		graph.addEdge(1, 3);
+		graph.addEdge(3, 4);
+		graph.addEdge(4, 5);
+		
+		
+		int[] targets = {5,3,4};
+		int result = graph.MultipleDagLCA(1,targets);
+		assertEquals(3,result);
+		
+	}
+	
+	
+	@Test void DAG_LCA_Multiple_loop() {
+		DAG graph = new DAG(16);
+		graph.addEdge(1, 2);
+		graph.addEdge(2, 3);
+		graph.addEdge(3, 1);
+		graph.addEdge(2, 5);
+		graph.addEdge(2, 6);
+		graph.addEdge(3, 7);
+		graph.addEdge(6, 8);
+		graph.addEdge(7, 8);
+		
+		
+		int[] targets = {7,8,1};
+		int result = graph.MultipleDagLCA(1,targets);
+		assertEquals(-1,result);
+		
+	}
+	
+	@Test void DAG_LCA_Multiple_many_but_some_valid_inputs() {
+		DAG graph = new DAG(4);
+		graph.addEdge(1, 2);
+		graph.addEdge(2, 3);
+
+		
+		int[] targets = {1,2,3,4,5,6};
+		int result = graph.MultipleDagLCA(1,targets);
+		assertEquals(1,result);
+		
+		int[] targets2 = {6,5,4,3,2,1};
+		int result2= graph.MultipleDagLCA(1,targets);
+		assertEquals(1,result2);
+		
+		// function will ignore inputs that aren't in the graph if there are too many
+		
+	}
+	
+	
+	@Test void DAG_LCA_Multiple_invalid_targets() {
+		DAG graph = new DAG(16);
+		graph.addEdge(1, 2);
+		graph.addEdge(2, 3);
+		graph.addEdge(3, 1);
+		graph.addEdge(2, 5);
+		graph.addEdge(2, 6);
+		graph.addEdge(3, 7);
+		graph.addEdge(6, 8);
+		graph.addEdge(7, 8);
+		
+		
+		int[] targets = {10,12,13};
+		int result = graph.MultipleDagLCA(1,targets);
+		assertEquals(-1,result);
+		
+	}
+	
+	
+	@Test void DAG_LCA_Multiple_invalid_root() {
+		DAG graph = new DAG(6);
+		graph.addEdge(1, 2);
+		graph.addEdge(2, 3);
+		graph.addEdge(3, 1);
+		
+		
+		
+		int[] targets = {2,3};
+		int result = graph.MultipleDagLCA(4,targets);
+		assertEquals(-1,result);
+		
+	}
+	
+	@Test void DAG_LCA_Multiple_straight_line() {
+		DAG graph = new DAG(14);
+		graph.addEdge(1, 2);
+		graph.addEdge(2, 3);
+		graph.addEdge(3, 4);
+		graph.addEdge(4, 5);
+		graph.addEdge(5, 6);
+		graph.addEdge(6, 7);
+		graph.addEdge(7, 8);
+		
+		
+		
+		int[] targets = {8,7};
+		int result = graph.MultipleDagLCA(6,targets);
+		assertEquals(7,result);
+		
+	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 }

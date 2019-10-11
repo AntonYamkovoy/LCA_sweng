@@ -142,6 +142,9 @@ public class DAG {
 		if(root < 0) {
 			return -1;
 		}
+		if(root > this.vertices/2) {
+			return -1;
+		}
 		findLoop(root);
 		if(isCyclic || !checkVertex(v) || !checkVertex(w) || edges ==0) {
 			return -1;
@@ -169,6 +172,9 @@ public class DAG {
 	}
 	
 	public int MultipleDagLCA(int root, int[] targets) {
+		if(root < 0) {
+			return -1;
+		}
 		if(targets.length < 2) {
 			return -1;
 		}
