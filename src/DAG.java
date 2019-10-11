@@ -31,6 +31,9 @@ public class DAG {
 			for(int i=0; i < vertices; i++) 
 				adjLists[i] = new ArrayList<Integer>();	
 		}
+		else {
+			throw new IllegalArgumentException("vertices < 0");
+		}
 		
 	}
 	
