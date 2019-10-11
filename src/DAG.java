@@ -108,8 +108,6 @@ public class DAG {
 	}
 	
 	
-	
-	
 	public ArrayList<Integer> BFS(int source)
 	{
 		ArrayList<Integer> ordering = new ArrayList<Integer>();
@@ -139,5 +137,32 @@ public class DAG {
 		return ordering;
 	}
 	
+	
+	public int dagLCA(int root, int v, int w) {
+		findLoop(root);
+		if(isCyclic || !checkVertex(v) || !checkVertex(w) || edges ==0) {
+			return -1;
+		}
+		DAG reverse = reverse();
+		ArrayList<Integer> path_0 = reverse.BFS(v);
+		ArrayList<Integer> path_1 = reverse.BFS(w);
+		ArrayList<Integer> intersection = new ArrayList<Integer>();
+		boolean resultFound = false;
+		for(int i=0; i < path_0.size(); i++) {
+			for(int j=0; j < path_1.size(); j++) {
+				if(path_0.get(i) == path_1.get(j)) {
+					intersection.add(path_0.get(i));
+					resultFound = true;
+				}
+			}
+			
+		}
+		if(resultFound) return intersection.get(0);
+		else return -1;
+		
+		
+		
+		
+	}
 	
 }
