@@ -168,4 +168,27 @@ public class DAG {
 		
 	}
 	
+	public int MultipleDagLCA(int root, int[] targets) {
+		if(targets.length < 2) {
+			return -1;
+		}
+		if(targets.length == 2) {
+			return dagLCA(root,targets[0],targets[1]);
+		}
+		int result =0;
+		int temp = dagLCA(root,targets[0],targets[1]);
+		for(int i=2; i < targets.length; i++) {
+			 result = dagLCA(root,temp,targets[i]);
+			 if(result == root) {
+				 return root;
+			 }
+			
+		}
+		return result;
+		
+	}
+	
+	
+	
+	
 }
