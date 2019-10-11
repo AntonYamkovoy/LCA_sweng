@@ -1,11 +1,14 @@
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class DAG {
 
 	
 	int vertices;
 	int edges;
-	ArrayList<Integer>[] adjacencyList;
+	ArrayList<Integer>[] adjLists;
 	int[] outdegree;
 	int[] indegree;
 	
@@ -19,14 +22,14 @@ public class DAG {
 			this.vertices = vertices;
 			this.edges = 0;
 			
-			adjacencyList =(ArrayList<Integer>[]) new ArrayList[vertices];
+			adjLists =(ArrayList<Integer>[]) new ArrayList[vertices];
 			
 			indegree = new int[vertices];
 			visitedVert = new boolean[vertices];
 			stack = new boolean[vertices];
 			
 			for(int i=0; i < vertices; i++) 
-				adjacencyList[i] = new ArrayList<Integer>();	
+				adjLists[i] = new ArrayList<Integer>();	
 		}
 		
 	}
@@ -38,7 +41,7 @@ public class DAG {
 	
 	public void addEdge(int v, int w) {
 		if(checkVertex(v) && checkVertex(w)) {
-			adjacencyList[v].add(w);
+			adjLists[v].add(w);
 			indegree[w]++;
 			edges++;
 		}
@@ -59,14 +62,14 @@ public class DAG {
 	
 	int outdegree(int v) {
 		if(checkVertex(v)) {
-			return adjacencyList[v].size();
+			return adjLists[v].size();
 		}
 		return -1;
 	}
 	
 	public Iterable<Integer> adj(int v)
 	{
-		return adjacencyList[v];
+		return adjLists[v];
 	}
 	
 	public void findLoop(int v) {
@@ -99,6 +102,38 @@ public class DAG {
 			}		
 		}
 		return reverse;
+	}
+	
+	
+	
+	
+	public ArrayList<Integer> BFS(int source)
+	{
+		ArrayList<Integer> ordering = new ArrayList<Integer>();
+		boolean visited[] = new boolean[vertices]; 
+		LinkedList<Integer> q = new LinkedList<Integer>();
+		
+		visited[source] = true;
+		q.add(source);
+		
+		while(q.size() != 0)
+		{
+			source = q.poll(); 
+			ordering.add(source);
+			
+			Iterator<Integer> i = adjLists[source].listIterator();
+			
+			while(i.hasNext())
+			{
+				int n = i.next();
+				if(!visited[n])
+				{
+					visited[n] = true;
+					q.add(n);
+				}
+			}
+		}
+		return ordering;
 	}
 	
 	
