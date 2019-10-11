@@ -139,6 +139,9 @@ public class DAG {
 	
 	
 	public int dagLCA(int root, int v, int w) {
+		if(edges ==0) {
+			return -1;
+		}
 		findLoop(root);
 		if(isCyclic) {
 			return -1;
