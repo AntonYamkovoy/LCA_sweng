@@ -1,6 +1,6 @@
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
@@ -8,10 +8,9 @@ class DAGTesting {
 
 	@Test
 	public void DAG_illegal_test() {
-	  
-	    assertThrows(IllegalArgumentException.class, () -> {
-	    DAG graph = new DAG(-1);
-	});
+		DAG graph;
+		Exception exception = assertThrows(Exception.class, () -> new DAG(-1));
+		assertEquals("vertices < 0", exception.getMessage());
 	}
 	
 	
@@ -79,6 +78,99 @@ class DAGTesting {
 		assertEquals(-1,graph.outdegree(9)); //invalid vertex
 		
 	}
+	
+	@Test void test_addEdge() {
+		DAG graph = new DAG(14);
+		
+		graph.addEdge(1, 2);
+		graph.addEdge(1, 3);
+		graph.addEdge(1, 4);
+		graph.addEdge(4, 6);
+		graph.addEdge(3, 5);
+		graph.addEdge(6, 7);
+		graph.addEdge(5, 7);
+		
+		graph.addEdge(-1, 1);
+		graph.addEdge(-2, 20); // errors due to checking in function
+		
+	}
+	
+	@Test
+	void cycleTest_DAG() {
+		
+		DAG graph = new DAG(10);
+		
+		graph.addEdge(1, 2);
+		graph.addEdge(2, 3);
+		graph.addEdge(3, 4);
+		graph.addEdge(4, 5);
+		graph.addEdge(5, 1);
+		
+		graph.findLoop(1);
+		
+		assertTrue(graph.isCyclic);
+		
+	}
 
+	@Test
+	void cycleTest_DAG_error() {
+		
+		DAG graph = new DAG(10);
+		
+		graph.addEdge(1, 2);
+		graph.addEdge(2, 3);
+		graph.addEdge(3, 4);
+		graph.addEdge(4, 5);
+		graph.addEdge(5, 1);
+		
+		graph.findLoop(0);
+		
+		//assertTrue(graph.isCyclic);
+		
+	}
+	
+
+	@Test
+	void cycleTest_DAG_acyclic() {
+		
+		DAG graph = new DAG(14);
+		
+		graph.addEdge(1, 2);
+		graph.addEdge(1, 3);
+		graph.addEdge(1, 4);
+		graph.addEdge(4, 6);
+		graph.addEdge(3, 5);
+		graph.addEdge(6, 7);
+		graph.addEdge(5, 7);
+		
+		graph.findLoop(1);
+		
+		//assertTrue(graph.isCyclic);
+		
+	}
+	
+	@Test void reverse_DAG_test() {
+		DAG graph = new DAG(10);
+		graph.addEdge(1, 2);
+		graph.addEdge(2, 3);
+		graph.addEdge(3, 4);
+		graph.addEdge(3, 6);
+		graph.addEdge(3, 5);
+		
+		graph.reverse();
+	
+		
+	}
+	
+	@Test void reverse_basecase_test() {
+		DAG graph = new DAG(1);
+		graph.reverse();
+	
+		
+	}
+	
+	
+	
+	
 
 }

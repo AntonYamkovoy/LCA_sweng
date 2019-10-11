@@ -80,7 +80,7 @@ public class DAG {
 		stack[v] = true;
 		
 		for(int w : adj(v)) {
-			if(visitedVert[w] = false) {
+			if(!visitedVert[w]) {
 				findLoop(w);
 			}
 			else if(stack[w]) {
