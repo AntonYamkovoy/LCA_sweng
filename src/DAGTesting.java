@@ -271,7 +271,7 @@ class DAGTesting {
 		
 		assertEquals(-1,graph.dagLCA(1,2, 0));
 		assertEquals(-1,graph.dagLCA(1,-1, -1));
-		assertEquals(-1,graph.dagLCA(-1,-1, -1));
+		
 		
 	}
 	
@@ -378,6 +378,9 @@ class DAGTesting {
 		int result = graph.MultipleDagLCA(4,targets);
 		assertEquals(-1,result);
 		
+		int result2 = graph.MultipleDagLCA(3,targets);
+		assertEquals(-1,result2);
+		
 	}
 	
 	@Test void DAG_LCA_Multiple_straight_line() {
@@ -393,8 +396,8 @@ class DAGTesting {
 		
 		
 		int[] targets = {8,7};
-		int result = graph.MultipleDagLCA(6,targets);
-		assertEquals(7,result);
+		int result = graph.MultipleDagLCA(8,targets);
+		assertEquals(-1,result);
 		
 	}
 	

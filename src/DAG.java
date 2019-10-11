@@ -139,10 +139,14 @@ public class DAG {
 	
 	
 	public int dagLCA(int root, int v, int w) {
+		findLoop(root);
+		if(isCyclic) {
+			return -1;
+		}
 		if(root < 0) {
 			return -1;
 		}
-		if(root > this.vertices/2) {
+		if(root > this.edges) {
 			return -1;
 		}
 		findLoop(root);
