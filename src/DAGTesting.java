@@ -401,16 +401,56 @@ class DAGTesting {
 		
 	}
 	
+	
+	@Test void DAG_LCA_Multiple_s1() {
+		DAG graph = new DAG(14);
+		graph.addEdge(1,2);
+		graph.addEdge(1,3);
+		graph.addEdge(2,4);
+		graph.addEdge(2,5);
+		graph.addEdge(3,6);
+		graph.addEdge(3,7);
+		
+		
+		
+		int[] targets = {6,7,4,5};
+		int result = graph.MultipleDagLCA(1,targets);
+		assertEquals(1,result);
 
+	}
 	
 	
+	@Test void DAG_LCA_Multiple_s2() {
+		DAG graph = new DAG(14);
+		
+		graph.addEdge(1, 3);
+		graph.addEdge(1,4);
+		graph.addEdge(1,5);
+		graph.addEdge(5,2);
+		
+		
+		
+		int[] targets = {2,3};
+		int result = graph.MultipleDagLCA(1,targets);
+		assertEquals(1,result);
+
+	}
 	
-	
-	
-	
-	
-	
-	
+	@Test void DAG_LCA_Multiple_s2_loop() {
+		DAG graph = new DAG(14);
+		
+		graph.addEdge(1, 3);
+		graph.addEdge(1,4);
+		graph.addEdge(1,5);
+		graph.addEdge(5,1);
+		
+		
+		
+		int[] targets = {2,3};
+		int result = graph.MultipleDagLCA(1,targets);
+		assertEquals(-1,result);
+
+	}
 	
 
 }
