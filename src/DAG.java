@@ -5,7 +5,7 @@ import java.util.Queue;
 
 public class DAG {
 
-	
+	//adjacencyLists data structure
 	int vertices;
 	int edges;
 	ArrayList<Integer>[] adjLists;
@@ -36,12 +36,12 @@ public class DAG {
 		}
 		
 	}
-	
+	//checking for validity of vertices added/used
 	boolean checkVertex(int v) {
 		if(v < 0 || v >= vertices) return false;
 		return true;	
 	}
-	
+	//add edge taking in 2 edges
 	public void addEdge(int v, int w) {
 		if(checkVertex(v) && checkVertex(w)) {
 			adjLists[v].add(w);
@@ -55,14 +55,14 @@ public class DAG {
 		
 	}
 
-	
+	//returns a valid value for indegree of a vertex
 	int indegree(int v) {
 		if(checkVertex(v)) {
 			return indegree[v];
 		}
 		return -1;
 	}
-	
+	//returns a valid value for indegree of a vertex
 	int outdegree(int v) {
 		if(checkVertex(v)) {
 			return adjLists[v].size();
@@ -70,16 +70,11 @@ public class DAG {
 		return -1;
 	}
 	
-	public Iterable<Integer> adj(int v)
-	{
-		return adjLists[v];
-	}
-	
+	//finds loop in a given dag for input vertex
 	public void findLoop(int v) {
 		visitedVert[v] = true;
 		stack[v] = true;
-		
-		for(int w : adj(v)) {
+		for(int w : adjLists[v]) {
 			if(!visitedVert[w]) {
 				findLoop(w);
 			}
@@ -87,8 +82,6 @@ public class DAG {
 				isCyclic = true;
 				return;
 			}
-			
-			
 		}
 		stack[v] = false;
 		
@@ -97,13 +90,7 @@ public class DAG {
 	public DAG reverse()
 	{
 		DAG reverse = new DAG(vertices);
-		for(int v = 0; v <vertices; v++)
-		{
-			for(int w : adj(v))
-			{
-				reverse.addEdge(w, v);
-			}		
-		}
+		for(int v = 0; v <vertices; v++) for(int w : adjLists[v]) reverse.addEdge(w, v);	
 		return reverse;
 	}
 	
@@ -116,14 +103,11 @@ public class DAG {
 		
 		visited[source] = true;
 		q.add(source);
-		
 		while(q.size() != 0)
 		{
 			source = q.poll(); 
 			ordering.add(source);
-			
 			Iterator<Integer> i = adjLists[source].listIterator();
-			
 			while(i.hasNext())
 			{
 				int n = i.next();
@@ -168,7 +152,6 @@ public class DAG {
 					resultFound = true;
 				}
 			}
-			
 		}
 		if(resultFound) return intersection.get(0);
 		else return -1;
