@@ -43,9 +43,6 @@ public class LCA {
 		TreeNode temp = lowestCommonAncestor(root,targets[0],targets[1]);
 		for(int i=2; i < targets.length; i++) {
 			 result = lowestCommonAncestor(root,temp,targets[i]);
-			 if(result == root) {
-				 return root;
-			 }
 			
 		}
 		return result;

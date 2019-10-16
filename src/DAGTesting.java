@@ -447,7 +447,23 @@ class DAGTesting {
 		
 		
 		int[] targets = {2,3};
-		int result = graph.MultipleDagLCA(1,targets);
+		int result = graph.MultipleDagLCA(-1,targets);
+		assertEquals(-1,result);
+
+	}
+	
+	@Test void DAG_LCA_targets_null() {
+		DAG graph = new DAG(14);
+		
+		graph.addEdge(1, 3);
+		graph.addEdge(1,4);
+		graph.addEdge(1,5);
+		graph.addEdge(5,1);
+		
+		
+		
+		int[] targets = {};
+		int result = graph.MultipleDagLCA(-1,targets);
 		assertEquals(-1,result);
 
 	}

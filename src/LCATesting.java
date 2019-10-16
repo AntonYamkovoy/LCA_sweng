@@ -8,6 +8,13 @@ import org.junit.jupiter.api.Test;
 class LCATesting {
 
 	
+	@Test
+	void LCA_init_test_2() {
+		LCA lca = new LCA();
+		
+		
+	}
+	
 	
 	@Test 
 	void lcaNullTest() {
