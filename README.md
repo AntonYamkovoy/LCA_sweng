@@ -13,3 +13,5 @@ Bender, Michael A.; Farach-Colton, Mart�n; Pemmasani, Giridhar; Skiena, Steven
 Part 2:
 
 Implement this function further to include Direct Acyclic Graphs as inputs.
+
+part 1 ends at https://github.com/AntonYamkovoy/LCA_sweng/commit/9df1350dad6851706149f5e924ca2645d17ac0c7
